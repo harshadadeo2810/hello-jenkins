@@ -3,28 +3,21 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                echo 'Fetching code from GitHub...'
-            }
-        }
-
         stage('Build') {
             steps {
-                echo 'Running build script...'
+                echo 'Running Build Script'
                 sh 'chmod +x app.sh'
                 sh './app.sh'
             }
         }
 
-    }
+        stage('Test') {
+            steps {
+                echo 'Running Test Script'
+                sh 'chmod +x test.sh'
+                sh './test.sh'
+            }
+        }
 
-    post {
-        success {
-            echo 'Build completed successfully'
-        }
-        failure {
-            echo 'Build failed'
-        }
     }
 }
